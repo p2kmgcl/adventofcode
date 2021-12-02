@@ -20,7 +20,7 @@ fn basic_navigation() {
         .unwrap();
 
     println!(
-        "Position: {}\nDepth: {}\nResult: {}",
+        "Basic navigation: position: {}, depth: {}, result: {}",
         position,
         depth,
         position * depth
@@ -51,7 +51,7 @@ fn aim_navigation() {
     }
 
     println!(
-        "Position: {}\nDepth: {}\nResult: {}",
+        "Aim navigation: position: {}, depth: {}, result: {}",
         position,
         depth,
         position * depth
