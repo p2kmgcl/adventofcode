@@ -1,8 +1,8 @@
+use crate::log;
 use std::{fs, ops::Index};
 
-fn basic_navigation() {
-    let [position, depth]: [i32; 2] = fs::read_to_string("src/year2021/day02/input.txt")
-        .expect("File doesn't exist")
+fn basic_navigation(contents: &str) -> i32 {
+    let [position, depth]: [i32; 2] = contents
         .lines()
         .map(|s| {
             let values: Vec<&str> = s.split(" ").collect();
@@ -19,20 +19,14 @@ fn basic_navigation() {
         .reduce(|a, b| [a[0] + b[0], a[1] + b[1]])
         .unwrap();
 
-    println!(
-        "Basic navigation: position: {}, depth: {}, result: {}",
-        position,
-        depth,
-        position * depth
-    );
+    return position * depth;
 }
 
-fn aim_navigation() {
+fn aim_navigation(contents: &str) -> i32 {
     let mut position = 0;
     let mut depth = 0;
     let mut aim = 0;
 
-    let contents = fs::read_to_string("src/year2021/day02/input.txt").expect("File doesn't exist");
     let lines = contents.lines().collect::<Vec<&str>>();
 
     for line in lines {
@@ -50,16 +44,12 @@ fn aim_navigation() {
         }
     }
 
-    println!(
-        "Aim navigation: position: {}, depth: {}, result: {}",
-        position,
-        depth,
-        position * depth
-    );
+    return position * depth;
 }
 
 pub fn main() {
     println!("2021/02");
-    basic_navigation();
-    aim_navigation();
+    let contents = fs::read_to_string("src/year2021/day02/input.txt").expect("File doesn't exist");
+    log("Basic navigation", &|| basic_navigation(&contents));
+    log("Aim navigation", &|| aim_navigation(&contents));
 }

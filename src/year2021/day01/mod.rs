@@ -1,3 +1,4 @@
+use crate::log;
 use std::{fs, ops::Index};
 
 fn simple_increase(values: &Vec<i32>) -> u32 {
@@ -50,7 +51,7 @@ pub fn main() {
         .map(|s| s.parse::<i32>().unwrap())
         .collect();
 
-    println!("Simple increase: {}", simple_increase(&values));
-    println!("Window increase (3): {}", window_increase(&values, 3));
-    println!("Native increase (3): {}", native_increase(&values, 3));
+    log("Simple increase", &|| simple_increase(&values));
+    log("Window increase (3)", &|| window_increase(&values, 3));
+    log("Native increase (3)", &|| native_increase(&values, 3));
 }
