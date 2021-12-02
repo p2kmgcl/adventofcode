@@ -27,16 +27,30 @@ fn window_increase(values: &Vec<i32>, window_size: usize) -> usize {
     return count;
 }
 
+fn native_increase(values: &Vec<i32>, window_size: usize) -> usize {
+    let mut count = 0;
+    let mut chunks = values.windows(window_size);
+    let mut previous: i32 = chunks.next().unwrap().iter().sum();
+
+    for chunk in chunks {
+        let value = chunk.iter().sum();
+        count = if value > previous { count + 1 } else { count };
+        previous = value;
+    }
+
+    return count;
+}
+
 pub fn main() {
     println!("2021/01");
 
-    let values = fs::read_to_string("src/year2021/day01/input.txt")
+    let values: Vec<i32> = fs::read_to_string("src/year2021/day01/input.txt")
         .expect("File doesn't exist")
         .lines()
         .map(|s| s.parse::<i32>().unwrap())
-        .collect::<Vec<i32>>();
+        .collect();
 
     println!("Simple increase: {}", simple_increase(&values));
     println!("Window increase (3): {}", window_increase(&values, 3));
-    println!("Window increase (1): {}", window_increase(&values, 1));
+    println!("Native increase (3): {}", native_increase(&values, 3));
 }
