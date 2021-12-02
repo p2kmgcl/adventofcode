@@ -1,5 +1,6 @@
 use std::fmt::Display;
 use std::time::Instant;
+pub mod year2020;
 pub mod year2021;
 
 pub fn log<T: Display>(name: &str, routine: &dyn Fn() -> T) {
@@ -21,5 +22,6 @@ pub fn log<T: Display>(name: &str, routine: &dyn Fn() -> T) {
 }
 
 fn main() {
+    year2020::main();
     year2021::main();
 }
