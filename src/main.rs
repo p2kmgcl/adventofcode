@@ -1,9 +1,16 @@
 use std::fs::read_to_string;
 use std::time::Instant;
 
+mod _2020;
 mod _2022;
 
 pub fn main() {
+    print_head();
+    run(2020, 1, vec![_2020::_01::part1, _2020::_01::part2]);
+    run(2022, 1, vec![_2022::_01::part1, _2022::_01::part2]);
+}
+
+fn print_head() {
     println!(
         "{: <7}  {: <20}  {: <10}  {: <10}",
         "Date", "Input type", "Time", "Result"
@@ -13,8 +20,6 @@ pub fn main() {
         "{: <7}  {: <20}  {: <10}  {: <10}",
         "----", "----------", "----", "------"
     );
-
-    run(2022, 1, vec![_2022::_01::part1, _2022::_01::part2]);
 }
 
 fn run(year: usize, day: usize, fns: Vec<fn(String) -> String>) {
