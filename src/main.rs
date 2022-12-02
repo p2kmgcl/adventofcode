@@ -8,6 +8,7 @@ pub fn main() {
     print_head();
     run(2020, 1, vec![_2020::_01::part1, _2020::_01::part2]);
     run(2022, 1, vec![_2022::_01::part1, _2022::_01::part2]);
+    run(2022, 2, vec![_2022::_02::part1, _2022::_02::part2]);
 }
 
 fn print_head() {
