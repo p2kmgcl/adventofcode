@@ -7,78 +7,47 @@ const SCORE_PAPER: u32 = 2;
 const SCORE_SCISSORS: u32 = 3;
 
 pub fn part1(input: String) -> String {
-    let mut score: u32 = 0;
-
-    for line in input.lines() {
-        score = score + get_line_score_part1(line);
-    }
-
-    score.to_string()
+    input
+        .lines()
+        .map(get_line_score_part1)
+        .sum::<u32>()
+        .to_string()
 }
 
 pub fn part2(input: String) -> String {
-    let mut score: u32 = 0;
-
-    for line in input.lines() {
-        score = score + get_line_score_part2(line);
-    }
-
-    score.to_string()
+    input
+        .lines()
+        .map(get_line_score_part2)
+        .sum::<u32>()
+        .to_string()
 }
 
 fn get_line_score_part1(line: &str) -> u32 {
-    match line.chars().nth(0).unwrap() {
-        'A' => match line.chars().nth(2).unwrap() {
-            'X' => SCORE_ROCK + SCORE_DRAW,
-            'Y' => SCORE_PAPER + SCORE_WIN,
-            'Z' => SCORE_SCISSORS + SCORE_LOSE,
-            _ => 0,
-        },
-        'B' => match line.chars().nth(2).unwrap() {
-            'X' => SCORE_ROCK + SCORE_LOSE,
-            'Y' => SCORE_PAPER + SCORE_DRAW,
-            'Z' => SCORE_SCISSORS + SCORE_WIN,
-            _ => 0,
-        },
-        'C' => match line.chars().nth(2).unwrap() {
-            'X' => SCORE_ROCK + SCORE_WIN,
-            'Y' => SCORE_PAPER + SCORE_LOSE,
-            'Z' => SCORE_SCISSORS + SCORE_DRAW,
-            _ => 0,
-        },
+    match line {
+        "A X" => SCORE_ROCK + SCORE_DRAW,
+        "A Y" => SCORE_PAPER + SCORE_WIN,
+        "A Z" => SCORE_SCISSORS + SCORE_LOSE,
+        "B X" => SCORE_ROCK + SCORE_LOSE,
+        "B Y" => SCORE_PAPER + SCORE_DRAW,
+        "B Z" => SCORE_SCISSORS + SCORE_WIN,
+        "C X" => SCORE_ROCK + SCORE_WIN,
+        "C Y" => SCORE_PAPER + SCORE_LOSE,
+        "C Z" => SCORE_SCISSORS + SCORE_DRAW,
         _ => 0,
     }
 }
 
 fn get_line_score_part2(line: &str) -> u32 {
-    let result_score: u32 = match line.chars().nth(2).unwrap() {
-        'X' => SCORE_LOSE,
-        'Y' => SCORE_DRAW,
-        'Z' => SCORE_WIN,
+    match line {
+        "A X" => SCORE_SCISSORS + SCORE_LOSE,
+        "A Y" => SCORE_ROCK + SCORE_DRAW,
+        "A Z" => SCORE_PAPER + SCORE_WIN,
+        "B X" => SCORE_ROCK + SCORE_LOSE,
+        "B Y" => SCORE_PAPER + SCORE_DRAW,
+        "B Z" => SCORE_SCISSORS + SCORE_WIN,
+        "C X" => SCORE_PAPER + SCORE_LOSE,
+        "C Y" => SCORE_SCISSORS + SCORE_DRAW,
+        "C Z" => SCORE_ROCK + SCORE_WIN,
         _ => 0,
-    };
-
-    let participation_score = match line.chars().nth(0).unwrap() {
-        'A' => match line.chars().nth(2).unwrap() {
-            'X' => SCORE_SCISSORS,
-            'Y' => SCORE_ROCK,
-            'Z' => SCORE_PAPER,
-            _ => 0,
-        },
-        'B' => match line.chars().nth(2).unwrap() {
-            'X' => SCORE_ROCK,
-            'Y' => SCORE_PAPER,
-            'Z' => SCORE_SCISSORS,
-            _ => 0,
-        },
-        'C' => match line.chars().nth(2).unwrap() {
-            'X' => SCORE_PAPER,
-            'Y' => SCORE_SCISSORS,
-            'Z' => SCORE_ROCK,
-            _ => 0,
-        },
-        _ => 0,
-    };
-
-    result_score + participation_score
+    }
 }
