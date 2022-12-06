@@ -11,6 +11,7 @@ pub fn main() {
     run(2022, 3, vec![_2022::_03::part1, _2022::_03::part2]);
     run(2022, 4, vec![_2022::_04::part1, _2022::_04::part2]);
     run(2022, 5, vec![_2022::_05::part1, _2022::_05::part2]);
+    run(2022, 6, vec![_2022::_06::part1, _2022::_06::part2]);
 }
 
 fn run(year: usize, day: usize, fns: Vec<fn(String) -> String>) {
